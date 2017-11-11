@@ -11,6 +11,8 @@ class MnistImagesController < ApplicationController
     render json: { status: 'ok' }
   end
 
+  private
+
   def permitted_params
     params.require(:mnist_image).permit(:label, :id)
   end
