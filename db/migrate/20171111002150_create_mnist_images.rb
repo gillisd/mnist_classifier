@@ -3,6 +3,7 @@ class CreateMnistImages < ActiveRecord::Migration[5.1]
     create_table :mnist_images do |t|
       t.string :label, null: false
       t.text :base64_string, null: false
+      t.string :state
 
       t.timestamps
     end

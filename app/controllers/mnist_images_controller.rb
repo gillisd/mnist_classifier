@@ -2,18 +2,12 @@ class MnistImagesController < ApplicationController
 
   def index
     # return unlabeled images
-    @mnist_images = MnistImage.includes(:mnist_images_users).where(
-      mnist_images_users: { user_id: nil }).page(1).per(20)
+    @mnist_images = MnistImage.unlabeled_images_for_user(current_user).limit(20)
     render json: @mnist_images
   end
 
   def label
-    MnistImagesUser.find_or_initialize_by(
-      mnist_image_id: permitted_params[:id],
-      user_id: current_user.id
-    ).tap do |mi_u|
-      mi_u.user_label = permitted_params[:label]
-    end.save!
+    MnistImagesUser.label_by_user(permitted_params[:id], current_user.id, permitted_params[:label])
     render json: { status: 'ok' }
   end
 

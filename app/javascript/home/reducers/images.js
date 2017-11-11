@@ -35,7 +35,7 @@ const images = (state = INITIAL_STATE, action) => {
     case IMAGES_RECEIVE: {
       return {
         ...state,
-        images: _.shuffle(action.payload),
+        images: action.payload,
         isFetching: false
       }
     }

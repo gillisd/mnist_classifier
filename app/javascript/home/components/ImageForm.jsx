@@ -77,7 +77,9 @@ ImageForm.propTypes = {
     id: PropTypes.number.isRequired,
     base64_string: PropTypes.string.isRequired
   }),
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool,
+  outOfImages: PropTypes.bool
 };
 
 export default ImageForm;

@@ -26,6 +26,8 @@ gem 'webpacker'
 gem 'jbuilder', '~> 2.5'
 gem 'chunky_png'
 gem 'kaminari'
+gem 'aasm'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -43,6 +45,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'hirb'
+  gem "factory_bot_rails", "~> 4.0"
 end
 
 group :development do

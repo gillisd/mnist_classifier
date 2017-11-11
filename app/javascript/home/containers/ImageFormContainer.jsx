@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ImageForm from "../components/ImageForm";
 
 
-class ImageContainer extends Component {
+class ImageFormContainer extends Component {
 
   componentWillMount() {
     this.props.fetchImages();
@@ -35,11 +35,15 @@ function mapStateToProps(state) {
   }
 }
 
-ImageContainer.propTypes = {
+ImageFormContainer.propTypes = {
   currentImage: PropTypes.shape({
     id: PropTypes.number.isRequired,
     base64_string: PropTypes.string.isRequired
-  })
+  }),
+  isFetching: PropTypes.bool,
+  outOfImages: PropTypes.bool,
+  saveImage: PropTypes.func,
+  fetchImages: PropTypes.func
 };
 
-export default connect(mapStateToProps, { fetchImages, saveImage })(ImageContainer);
+export default connect(mapStateToProps, { fetchImages, saveImage })(ImageFormContainer);

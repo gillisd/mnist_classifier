@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20171111002709) do
   create_table "mnist_images", force: :cascade do |t|
     t.string "label", null: false
     t.text "base64_string", null: false
+    t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["base64_string"], name: "index_mnist_images_on_base64_string", unique: true

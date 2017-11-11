@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import ImageContainer from './containers/ImageContainer'
+import ImageFormContainer from './containers/ImageFormContainer'
 import axios from 'axios';
 
 const csrfToken = document.getElementsByTagName('meta')['csrf-token']['content'];
@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ImageContainer/>
+        <ImageFormContainer/>
       </Provider>
     );
   }
