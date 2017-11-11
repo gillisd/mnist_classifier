@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+10.times do |n|
+  Dir.glob("db/mnist_pngs/#{n}/*.png") do |png|
+    encoded_image = Base64.strict_encode64(open(png).read)
+    MnistImage.create(base64_string: encoded_image, label: n)
+  end
+end
+puts 'successfully seeded images'
