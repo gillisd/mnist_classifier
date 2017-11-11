@@ -3,7 +3,7 @@ class MnistImagesController < ApplicationController
   def index
     # return unlabeled images
     @mnist_images = MnistImage.includes(:mnist_images_users).where(
-      mnist_images_users: { user_id: nil })
+      mnist_images_users: { user_id: nil }).page(1).per(20)
     render json: @mnist_images
   end
 

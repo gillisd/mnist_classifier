@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IMAGES_FETCH, IMAGES_RECEIVE, IMAGES_SAVE, IMAGES_REMOVE } from "../types";
+import { IMAGES_FETCH, IMAGES_RECEIVE, IMAGES_REMOVE } from "../types";
 
 export function fetchImages() {
   return function (dispatch) {
@@ -25,16 +25,12 @@ export function saveImage({ imageId, label }) {
 }
 
 export function removeImage(imageId) {
-  return {
-    type: IMAGES_REMOVE,
-    payload: imageId
-  }
-}
-
-export function selectImage(imageId) {
-  return {
-    type: IMAGES_SELECT,
-    payload: imageId
+  return function (dispatch, getState) {
+    if (getState().images.images.length < 2) {
+      dispatch(fetchImages())
+    } else {
+      dispatch({ type: IMAGES_REMOVE, payload: imageId })
+    }
   }
 }
 
