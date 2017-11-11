@@ -3,10 +3,24 @@ import PropTypes from 'prop-types';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 
 const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    margin: 'auto'
+  },
+  h1: {
+    fontSize: '16px',
+    marginBottom: '20px'
+  },
   image: {
-    height: '100px'
+    height: '100px',
+    width: '100px',
+    margin: 'auto',
+    marginBottom: '20px'
   },
   form: {
+    textAlign: 'center',
     margin: 'auto'
   }
 };
@@ -28,6 +42,8 @@ class ImageForm extends Component {
     const { value } = e.target;
     if (!isNaN(value)) {
       this.setState({ value });
+    } else {
+      alert(`The character you entered is not a number. Please enter a number`);
     }
   };
 
@@ -37,6 +53,8 @@ class ImageForm extends Component {
     const { value } = this.state;
     if (value) {
       onSubmit({ imageId: currentImage.id, label: value });
+    } else {
+      alert('Please enter a number')
     }
   };
 
@@ -44,7 +62,12 @@ class ImageForm extends Component {
     const { currentImage, outOfImages, isFetching } = this.props;
     if (currentImage) {
       return (
-        <div>
+        <div style={styles.container}>
+          <h1 style={styles.h1}>
+            <strong>Instructions:  </strong>Enter the character shown in the image into the text box, then click the Submit
+            button or press
+            Enter
+          </h1>
           <img style={styles.image} alt="Embedded Image" src={`data:image/png;base64,${currentImage.base64_string}`}/>
           <form onSubmit={this.handleSubmit} style={styles.form}>
             <FormGroup
