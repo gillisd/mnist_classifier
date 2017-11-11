@@ -11,4 +11,8 @@
 #
 
 class MnistImagesUser < ApplicationRecord
+  belongs_to :user
+  belongs_to :mnist_image
+
+
 end

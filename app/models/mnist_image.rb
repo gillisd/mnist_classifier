@@ -10,4 +10,7 @@
 #
 
 class MnistImage < ApplicationRecord
+  validates_presence_of [:label, :base64_string]
+  has_many :mnist_images_users
+  has_many :users, through: :mnist_images_users
 end
