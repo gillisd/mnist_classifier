@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchImages } from "../actions/images";
+import { fetchImages, saveImage } from "../actions/images";
 import PropTypes from 'prop-types';
+import ImageForm from "../components/ImageForm";
 
-const styles = {
-  image: {
-    height: '100px'
-  }
-};
 
 class ImageContainer extends Component {
 
@@ -16,23 +12,26 @@ class ImageContainer extends Component {
   }
 
   render() {
-    const { currentImage } = this.props;
-    if (currentImage) {
-      return (
-        <div>
-          <img style={styles.image} alt="Embedded Image" src={`data:image/png;base64,${currentImage.base64_string}`}/>
-        </div>
-      )
-    } else {
-      return <div>Loading...</div>
-    }
-
+    const { currentImage, saveImage, outOfImages, isFetching } = this.props;
+    return (
+      <ImageForm onSubmit={saveImage} outOfImages={outOfImages} isFetching={isFetching} currentImage={currentImage}/>
+    )
   }
 }
 
 function mapStateToProps(state) {
+  let outOfImages = false;
+  const images = state.images.images;
+  const currentImage = images && images[0];
+
+  if (images && (images.length === 0)) {
+    outOfImages = true
+  }
+
   return {
-    currentImage: state.images.images[0]
+    currentImage,
+    isFetching: state.images.isFetching,
+    outOfImages
   }
 }
 
@@ -43,4 +42,4 @@ ImageContainer.propTypes = {
   })
 };
 
-export default connect(mapStateToProps, { fetchImages })(ImageContainer);
+export default connect(mapStateToProps, { fetchImages, saveImage })(ImageContainer);

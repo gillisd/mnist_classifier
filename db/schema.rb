@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20171111002709) do
   create_table "mnist_images_users", force: :cascade do |t|
     t.integer "mnist_image_id", null: false
     t.integer "user_id", null: false
-    t.string "label", null: false
+    t.string "user_label", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "mnist_image_id"], name: "index_mnist_images_users_on_user_id_and_mnist_image_id", unique: true

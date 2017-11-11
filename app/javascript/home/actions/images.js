@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IMAGES_FETCH, IMAGES_RECEIVE, IMAGES_SAVE } from "../types";
+import { IMAGES_FETCH, IMAGES_RECEIVE, IMAGES_SAVE, IMAGES_REMOVE } from "../types";
 
 export function fetchImages() {
   return function (dispatch) {
@@ -14,9 +14,20 @@ export function fetchImages() {
   }
 }
 
-export function saveImage(imageId) {
+export function saveImage({ imageId, label }) {
   return function (dispatch) {
-    return axios.post('http://localhost:8000/images/', { remote_id: imageId, post_id: 1 })
+    return axios.post('/mnist_images/label', { label, id: imageId })
+      .then(() => {
+        dispatch(removeImage(parseInt(imageId)))
+      })
+      .catch((error) => alert('Something went wrong, please try again'))
+  }
+}
+
+export function removeImage(imageId) {
+  return {
+    type: IMAGES_REMOVE,
+    payload: imageId
   }
 }
 
